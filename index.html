@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <title> Recipes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/recipe.controller.js"></script>
+  </head>
+
+  <body ng-controller="RecipeController as vm">
+    <div class="container">
+		<div class="well" > 
+			<script type="text/ng-template" id="group-template.html">
+		    <div class="panel panel-default">
+		      <div class="panel-heading">
+		        <h4 class="panel-title" style="color:#fa39c3">
+		          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+		            <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+		              {{heading}}
+		            </span>
+		          </a>
+		        </h4>
+		      </div>
+		      <div class="panel-collapse collapse" uib-collapse="!isOpen">
+		        <div class="panel-body" style="text-align: right" ng-transclude></div>
+		      </div>
+		    </div>
+		  </script>
+
+		  <uib-accordion close-others="oneAtATime">
+		  	<div class = "panel-heading">	
+			 <div uib-accordion-group class="panel-success" heading="{{recipe.title}}" ng-repeat="recipe in vm.recipes">
+			 
+		      	<div class="panel-body">
+						<h4 class="text-center"> Ingredients</h4>
+					</div>
+					<hr>
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat=" ingred in recipe.ingredients">{{ingred}}</li>
+					</ul>
+					<button class="btn btn-danger" ng-click="vm.delete()">Delete</button>
+					<button class="btn btn-default" ng-click="vm.edit()">Edit</button>
+										    
+			    </div>
+				</div>		  
+			</uib-accordion>
+			<script type="text/ng-template" id="myModalContent.html">
+					<div >
+		        <div class="modal-header">
+		            <h3 class="modal-title" id="modal-title">{{recipe.title}}</h3>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		            <ul>
+		                <li>
+		                    <a href="#">{{ ingred }}</a>
+		                </li>
+		            </ul>		            
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-primary" type="button" ng-click="vm.ok()">Ok</button>
+		            <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+		        </div>
+		        </div>
+				 
+		    </script>
+
+				 
+		
+		
+		</div>
+		<div addRecipe> </div>
+		<!-- <button class="btn btn-lg btn-primary"> Add Recipe </button> -->
+	</div>	
+  </body>
+
+</html>

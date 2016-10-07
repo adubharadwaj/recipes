@@ -1,0 +1,15 @@
+.panel {
+	background-color: #d6e9c6;	
+}
+
+.panel-collapse .panel-body {
+	background-color: #fff;
+}
+
+.panel-body{
+	padding: 5px;
+}
+
+.container {
+  margin-top: 15px;
+}
